@@ -1,0 +1,42 @@
+let posX1 = 0;
+let posX2 = 0;
+let speed = 1;
+let barWidth = 30;
+let offset = 75;
+
+
+function setup() {
+  createCanvas(800, 200);
+}
+
+function draw() {
+  background(255);
+
+  // 黑白條文背景
+  for (let i = 0; i < width; i += barWidth) {
+    fill(i % (barWidth * 2) === 0 ? 255 : 0);
+    rect(i, 0, barWidth, height);
+  }
+
+  // 黃色方塊
+  fill(255, 255, 0);
+  rect(posX1, 30, 60, 30);
+
+  // 藍色方塊
+  fill(0, 0, 139);
+  rect(posX2, 60+offset, 60, 30);
+
+  // 更新位置
+  posX1 = (posX1 + speed) % width;
+  posX2 = (posX2 + speed) % width;
+
+  // 按住鼠標消除錯覺效果
+  if (mouseIsPressed) {
+    fill(255);
+    rect(0, 0, width, height, [255]);
+    fill(255, 255, 0);
+    rect(posX1, 30, 60, 35);
+    fill(0, 0, 139);
+    rect(posX2, 60+offset, 60, 35);
+  }
+}
