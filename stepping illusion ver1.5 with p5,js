@@ -1,0 +1,44 @@
+let posY1 = 200;
+let posY2 = 250;
+let speed = 1.2;
+let barHeight = 20; // 黑白條狀的高度
+
+function setup() {
+  createCanvas(800, 200);
+}
+
+function draw() {
+  background(255);
+
+  // 黑白橫條背景
+  for (let j = 0; j < height; j += barHeight) {
+    fill(j % (barHeight * 2) === 0 ? 255 : 0);
+    rect(0, j, width, barHeight);
+  }
+
+  // 紅色方塊
+  fill(255, 255, 0);
+  rect(200, posY1, 50, 50);
+
+  // 藍色方塊
+  fill(0, 0, 139);
+  rect(400, posY2, 50, 50);
+
+  // 更新位置，使兩個方塊同步向上移動
+  posY1 -= speed;
+  posY2 -= speed;
+
+  // 當方塊超出畫布頂部時重置
+  if (posY1 < -50) posY1 = height;
+  if (posY2 < -50) posY2 = height;
+
+  // 按住鼠標消除錯覺效果
+  if (mouseIsPressed) {
+    fill(255);
+    rect(0, 0, width, height);
+    fill(255, 255, 0);
+    rect(200, posY1, 50, 50);
+    fill(0, 0, 139);
+    rect(400, posY2, 50, 50);
+  }
+}
