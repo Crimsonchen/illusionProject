@@ -1,7 +1,7 @@
 let posY1 = 200;
 let posY2 = 275;
 let speed1 = 1;
-let speed2 = 1.2; // 略微不同的速度
+let speed2 = 1.01; // 略微不同的速度
 let barHeight = 20;
 
 function setup() {
@@ -18,10 +18,10 @@ function draw() {
   }
 
   // 紅色火柴人
-  drawStickFigure(200, posY1, color(255, 0, 0));
+  drawStickFigure(200, posY1, color(255, 255, 0));
 
   // 藍色火柴人
-  drawStickFigure(400, posY2, color(0, 0, 255));
+  drawStickFigure(400, posY2, color(0, 0, 139));
 
   // 更新位置，使两個火柴人略有速度差異的同步
   posY1 -= speed1;
@@ -35,8 +35,8 @@ function draw() {
   if (mouseIsPressed) {
     fill(255);
     rect(0, 0, width, height);
-    drawStickFigure(200, posY1, color(255, 0, 0));
-    drawStickFigure(400, posY2, color(0, 0, 255));
+    drawStickFigure(200, posY1, color(255, 255, 0));
+    drawStickFigure(400, posY2, color(0, 0, 139));
   }
 }
 
