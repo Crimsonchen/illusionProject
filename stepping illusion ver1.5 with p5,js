@@ -5,7 +5,7 @@ let speed2 = 1.2;
 let barHeight = 20; // 黑白條狀的高度
 
 function setup() {
-  createCanvas(800, 200);
+  createCanvas(600, 800);
 }
 
 function draw() {
