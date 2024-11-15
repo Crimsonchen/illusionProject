@@ -43,7 +43,7 @@ function draw() {
 function drawPlatformAndStickFigure(x, y, col) {
   // 繪製平台
   fill(col);
-  rect(x - 35, y + 10, 75, 45); // 平台比火柴人稍宽
+  rect(x - 35, y + 10, 72, 45); // 平台比火柴人稍宽
 
   // 繪製火柴人
   stroke(col);
