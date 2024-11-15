@@ -50,14 +50,14 @@ function drawPlatformAndStickFigure(x, y, col) {
   strokeWeight(4);
 
   // 頭
-  ellipse(x, y - 20, 20, 20);
+  ellipse(x, y - 13, 20, 20);
 
   // 身體
   line(x, y, x, y + 30);
 
   // 手臂
-  line(x, y + 10, x - 10, y + 20);
-  line(x, y + 10, x + 10, y + 20);
+  line(x, y + 10, x - 10, y + 0);
+  line(x, y + 10, x + 10, y + 0);
 
   // 腿
   line(x, y + 30, x - 10, y + 50);
