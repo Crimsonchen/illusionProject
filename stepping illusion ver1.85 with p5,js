@@ -1,0 +1,67 @@
+let posY1 = 200;
+let posY2 = 275;
+let speed1 = 0.5;
+let speed2 = 0.6; // 略微不同的速度
+let barHeight = 20;
+
+function setup() {
+  createCanvas(600, 800);
+}
+
+function draw() {
+  background(255);
+
+  // 黑白橫條背景
+  for (let j = 0; j < height; j += barHeight) {
+    fill(j % (barHeight * 2) === 0 ? 255 : 0);
+    rect(0, j, width, barHeight);
+  }
+
+  // 白色火柴人和平台
+  drawPlatformAndStickFigure(200, posY1, color(255, 255, 255));
+
+  // 黑色火柴人和平台
+  drawPlatformAndStickFigure(400, posY2, color(0, 0, 0));
+
+  // 更新位置，使两個火柴人略有速度差異的同步
+  posY1 -= speed1;
+  posY2 -= speed2;
+
+  // 当物件超出画布顶部時重置
+  if (posY1 < -50) posY1 = height;
+  if (posY2 < -50) posY2 = height;
+
+  // 按住鼠標消除錯覺效果
+  if (mouseIsPressed) {
+    fill(255);
+    rect(0, 0, width, height);
+    drawPlatformAndStickFigure(200, posY1, color(255, 255, 255));
+    drawPlatformAndStickFigure(400, posY2, color(0, 0, 0));
+  }
+}
+
+function drawPlatformAndStickFigure(x, y, col) {
+  // 繪製平台
+  // 移除平台的邊框
+  noStroke();
+  fill(col);
+  rect(x - 35, y + 10, 72, 45); // 平台比火柴人稍宽
+
+  // 繪製火柴人
+  stroke(col);
+  strokeWeight(4);
+
+  // 頭
+  ellipse(x, y - 13, 20, 20);
+
+  // 身體
+  line(x, y, x, y + 30);
+
+  // 手臂
+  line(x, y + 10, x - 10, y + 0);
+  line(x, y + 10, x + 10, y + 0);
+
+  // 腿
+  line(x, y + 30, x - 10, y + 50);
+  line(x, y + 30, x + 10, y + 50);
+}
