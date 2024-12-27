@@ -1,0 +1,50 @@
+function setup() {
+  createCanvas(600, 600);
+  background(240); // 背景为浅灰
+  noStroke(); // 取消描边
+
+  // 圆点的参数
+  let centerX = width / 2;
+  let centerY = height / 2;
+  let circleSize = 50;
+
+  // 绘制灰色的圆点
+  fill(100); // 灰色圆点
+  ellipse(centerX, centerY, circleSize);
+
+  // 矩形参数
+  let rectangles = 15; // 矩形的总数量
+  let minDistance = circleSize / 2 + 5; // 矩形到圆中心点的最短距离，稍微超出圆点
+  let maxDistance = 250; // 矩形到圆中心点的最长距离
+
+  for (let i = 0; i < rectangles; i++) {
+    // 随机角度
+    let angle = random(TWO_PI);
+
+    // 设置矩形的两端位置
+    let startDistance = random(minDistance, minDistance + 30); // 靠近圆点的一端的距离（光线始点）
+    let endDistance = random(startDistance + 30, maxDistance); // 远离圆点的一端的距离（光线终点）
+
+    // 计算矩形两端的坐标
+    let startX = centerX + cos(angle) * startDistance;
+    let startY = centerY + sin(angle) * startDistance;
+    let endX = centerX + cos(angle) * endDistance;
+    let endY = centerY + sin(angle) * endDistance;
+
+    // 矩形的宽度（短边），模拟光线厚度
+    let rectWidth = random(10, 20);
+
+    // 计算矩形的方向向量
+    let dirX = endX - startX;
+    let dirY = endY - startY;
+    let length = dist(startX, startY, endX, endY); // 矩形的长度（长边）
+
+    // 将矩形沿着方向绘制
+    push();
+    translate(startX, startY); // 移动到矩形的起点
+    rotate(atan2(dirY, dirX)); // 旋转使矩形指向终点
+    fill(0); // 黑色矩形
+    rect(0, -rectWidth / 2, length, rectWidth); // 绘制矩形
+    pop();
+  }
+}
