@@ -1,0 +1,60 @@
+let rects = []; // 儲存每個長方形的位置信息
+let rectWidth = 300; // 長方形的寬度
+let rectHeight = 100; // 長方形的高度
+let squareSize = 50; // 黑色正方形的邊長
+let spacing = squareSize; // 每個黑色正方形之間的間距等於邊長
+let verticalSpacing = 102; // 長方形之間的間距（100 高 + 2px 的空隙）
+let direction = 1; // 長方形的移動方向：-1 是向左，1 是向右
+let speed = 1; // 長方形每次移動的像素數量
+
+function setup() {
+  createCanvas(400, 500); // 畫布尺寸
+  stroke(0, 0, 255); // 長方形的邊框為藍色
+  strokeWeight(8); // 長方形邊框寬度
+
+  let startX = 50; // 長方形初始 x 座標
+  let startY = 50; // 長方形初始 y 座標
+
+  // 初始化長方形的數據
+  for (let i = 0; i < 3; i++) {
+    let rectStartY = startY + i * verticalSpacing; // 每個長方形的 y 座標
+    rects.push({
+      x: startX, // 長方形的初始 x 座標
+      y: rectStartY, // 長方形的初始 y 座標
+    });
+  }
+}
+
+function draw() {
+  background(255); // 白色背景
+  
+  // 繪製每個長方形及其內部固定的黑色正方形
+  for (let i = 0; i < rects.length; i++) {
+    let rectX = rects[i].x; // 長方形的當前 x 座標
+    let rectY = rects[i].y; // 長方形的 y 座標
+
+    // 繪製藍色長方形
+    fill(255); // 長方形內部填充白色
+    rect(rectX, rectY, rectWidth, rectHeight);
+
+    // 繪製黑色固定的正方形（相對於畫布固定）
+    let squareStartY = rectY + rectHeight - squareSize - 8; // 保持和長方形下邊距 8px
+    for (let j = 0; j < 3; j++) {
+      let squareStartX = 50 + spacing / 2 + j * (squareSize + spacing); // 水平位置在畫布固定
+      fill(0); // 黑色填充
+      rect(squareStartX, squareStartY, squareSize, squareSize);
+    }
+  }
+
+  // 控制長方形的移動
+  if (frameCount % 6 === 0) { // 每約 0.1 秒更新一次
+    for (let i = 0; i < rects.length; i++) {
+      rects[i].x += direction * speed; // 將長方形移動
+    }
+  }
+
+  // 切換長方形的移動方向
+  if (frameCount % 12 === 0) { // 每約 0.2 秒切換方向
+    direction *= -1;
+  }
+}
